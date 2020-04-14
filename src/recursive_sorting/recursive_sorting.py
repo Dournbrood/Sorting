@@ -10,29 +10,39 @@ def merge(arrA, arrB):
     elements = len(arrA) + len(arrB)
     merged_arr = [0] * elements
     # TO-DO
-    print(f"dummy array is {merged_arr}")
+    # print(f"dummy array is {merged_arr}")
 
     i = 0
     j = 0
     k = 0
     while j < len(arrA) and k < len(arrB) and i < elements:
-        print(f"i is {i}\nj is {j}\nk is {k}")
+        # print(f"i is {i}\nj is {j}\nk is {k}")
         if arrA[j] <= arrB[k]:
-            print(
-                f"arrA[{j}]: {arrA[j]} is less than or equal to arrB[{k}]: {arrB[k]}.")
+            # print(
+            #     f"arrA[{j}]: {arrA[j]} is less than or equal to arrB[{k}]: {arrB[k]}.")
             merged_arr[i] = arrA[j]
             i += 1
             j += 1
-            print(f"merged_arr is now: {merged_arr}")
+            # print(f"merged_arr is now: {merged_arr}")
         elif arrB[k] < arrA[j]:
-            print(
-                f"arrB[{k}]: {arrB[k]} is less than arrA[{j}]: {arrA[j]}.")
+            # print(
+            #     f"arrB[{k}]: {arrB[k]} is less than arrA[{j}]: {arrA[j]}.")
             merged_arr[i] = arrB[k]
             i += 1
             k += 1
-            print(f"merged_arr is now: {merged_arr}")
+            # print(f"merged_arr is now: {merged_arr}")
 
-    print(f"final merged array is {merged_arr}")
+    while i < elements:
+        if j < len(arrA):
+            merged_arr[i] = arrA[j]
+            i += 1
+            j += 1
+        elif k < len(arrB):
+            merged_arr[i] = arrB[k]
+            i += 1
+            k += 1
+
+    # print(f"final merged array is {merged_arr}")
     return merged_arr
 
 
@@ -41,8 +51,9 @@ merge([1], [6])
 merge([1, 3, 7], [4, 2, 6, 8])
 merge([1, 2, 2, 2, 3], [4, 5, 6, 7, 7, 7, 8])
 
-merge([], [4, 5, 6, 7, 7, 7, 8])
-merge([1, 2, 2, 2, 3], [])
+print(merge([], [4, 5, 6, 7, 7, 7, 8]))
+print(merge([1, 2, 2, 2, 3], []))
+print(merge([], []))
 
 
 # TO-DO: implement the Merge Sort function below USING RECURSION
@@ -50,11 +61,29 @@ merge([1, 2, 2, 2, 3], [])
 
 def merge_sort(arr):
     # TO-DO
+    # print(f"arr is {arr}")
+    if len(arr) <= 1:
+        return arr
 
-    return arr
+    subArr1 = arr[0:len(arr) // 2:1]
+    subArr2 = arr[len(arr) // 2::1]
+
+    # print(f"subArr1 is {subArr1}")
+    # print(f"subArr1 is {subArr1}")
+
+    return merge(merge_sort(subArr1), merge_sort(subArr2))
+
+
+print(merge_sort([2, 1, 6, 7, 1, 5, 0, 4, 9]))
+print(merge_sort([2, 643]))
+print(merge_sort([3, 2, 2]))
+print(merge_sort([3, 2]))
+print(merge_sort([]))
 
 
 # STRETCH: implement an in-place merge sort algorithm
+
+
 def merge_in_place(arr, start, mid, end):
     # TO-DO
 
